@@ -7,7 +7,7 @@ test.describe("Home page", () => {
 
   test("visual test", async ({ page }) => {
     await page.waitForLoadState("networkidle");
-    await expect(page).toHaveScreenshot("home-page-no-auth.png", {
+    await expect(page).toHaveScreenshot("home-page.png", {
       //mask: [page.getByTitle("Practice Software Testing - Toolshop")],
     });
   });
