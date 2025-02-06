@@ -1,4 +1,5 @@
 import { test,expect } from "@playwright/test";
+import CheckoutPage from "../pages/checkout";
 
 test.describe("Checkout Page", () => {
     test.use({storageState: ".auth/customer01.json"}
@@ -34,6 +35,17 @@ test.describe("Checkout Page", () => {
             await expect(page.locator(".help-block")).toHaveText(
               "Payment was successful" );
         });
-    });
+        
+
+        test.only("Checkout as logged in user using POM", async ({ page }) => {
+
+          
+            const checkoutPage = new CheckoutPage(page);
+            await checkoutPage.addProductToCart();
+            await checkoutPage.proceedToCheckout();
+            await checkoutPage.fillShippingDetails();
+            await checkoutPage.selectPaymentMethod();
+            });
+          });
     
     

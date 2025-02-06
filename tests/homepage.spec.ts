@@ -28,4 +28,5 @@ test.describe("Home page", () => {
     await expect(productGrid.getByRole("link")).toHaveCount(1);
     await expect(page.getByAltText("Thor Hammer")).toBeVisible();
   });
+
 });
