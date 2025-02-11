@@ -1,12 +1,36 @@
 # playwright-demotoolshop
 
-### Playwright Testing Project with TypeScript and Page Object Model (POM)
+## Playwright Testing Project with TypeScript and Page Object Model (POM)
 
-📌 **Overview**
+### 📌 Overview
 
 This repository contains an automated testing framework using Playwright with TypeScript, following the Page Object Model (POM) design pattern. It enables efficient test automation for web applications with better maintainability and scalability.
 
-🛠️ **Tech Stack**
+This Project contains an open source website("https://practicesoftwaretesting.com/") UI testing Framework for HomePage,LoginPage,add a product to cart and checkout process.
+
+1.Login to application using the link(("https://practicesoftwaretesting.com/")
+
+2.Validate sign in and page title are correct.
+
+3.There is a search button on home page,search for "Thor Hammer".
+
+4. Validate the number of item is correct and properly visible.
+
+5.Login with Valid credential to the application.
+
+6.Validate correct username is showing instead of sign in button.
+
+7.Capture the login details in cookies and use this same login details to do checkout of a product.
+
+8.Search for "Claw Hammer with Shock Reduction Grip" and add this item to cart.
+
+9.Check the cart item should be 1.
+
+10.Fill all the details as logged in user and do the checkout process.
+
+11."Payment was successful" should be visible on the checkout page.
+
+### 🛠️ Tech Stack
 
 - Playwright 🕵️‍♂️ (End-to-end testing)
 
@@ -20,24 +44,23 @@ This repository contains an automated testing framework using Playwright with Ty
 
        📦 playwright-demotoolshop
             ┣ 📂 tests
-            ┃ ┣ 📜 login.spec.ts
-            ┃ ┣ 📜 dashboard.spec.ts
+            ┃ ┣ 📜 auth.setup.ts
+            ┃ ┣ 📜 checkoutpage.spec.ts
+            ┃ ┣ 📜 homepage.spec.ts
+            ┃ ┣ 📜 loginpage.spec.ts
             ┣ 📂 pages
-            ┃ ┣ 📜 LoginPage.ts
-            ┃ ┣ 📜 DashboardPage.ts
-            ┣ 📂 utils
-            ┃ ┣ 📜 helpers.ts
+            ┃ ┣ 📜 checkout.ts
+            ┃ ┣ 📜 login.ts
             ┣ 📜 playwright.config.ts
             ┣ 📜 package.json
-            ┣ 📜 tsconfig.json
-            ┗ 📜 README.md
+            
 
-🚀 **Installation & Setup**
+### 🚀 Installation & Setup
 
    **1.Clone the repository**
   
-      git clone https://github.com/your-username/playwright-testing-project.git
-      cd playwright-testing-project
+      git clone https://github.com/your-username/playwright-demotoolshop.git
+      cd playwright-demotoolshop
 
    **2.Install dependencies**
 
@@ -51,40 +74,56 @@ This repository contains an automated testing framework using Playwright with Ty
 ### 📌  Page Object Model (POM) Implementation 
   The Page Object Model (POM) helps in organizing locators and actions for different pages.
   
-  **Example** : pages/LoginPage.ts
+  **Example** : pages/login.ts
 
-        import { Page } from '@playwright/test';
+        import {Page } from "@playwright/test";
 
-        export class LoginPage {
-                constructor(private page: Page) {}
+        export default class LoginPage {
 
-           async navigate() {
-                   await this.page.goto('https://example.com/login');
-               }
+                   emailInput: any;
+                   passwordInput: any;
+                   loginButton: any;
 
-          async login(username: string, password: string) {
-          await this.page.fill('#username', username);
-          await this.page.fill('#password', password);
-          await this.page.click('button[type="submit"]');
+               constructor(public page: Page){
+               this.page = page;
+               this.emailInput = page.getByTestId("email");
+               this.passwordInput = page.getByTestId("password");
+               this.loginButton = page.getByTestId("login-submit");
+
+              }
+              async goto() {
+                        await this.page.goto("https://practicesoftwaretesting.com/");
+                   }
+
+              async signIn() {
+                        await this.page.getByTestId("nav-sign-in").click();
+                    }
+
+             async login(email: string, password: string) {
+            await this.emailInput.fill(email);
+            await this.passwordInput.fill(password);
+            await this.loginButton.click();
+             }
         }
-    }
 
 
 ### 🧪 Writing Tests
   Tests are written using Playwright Test Runner.
 
- **Example**: tests/login.spec.ts
+ **Example**: tests/loginpage.spec.ts
 
-     import { test, expect } from '@playwright/test';
-     import { LoginPage } from '../pages/LoginPage';
-
-       test('User should be able to log in', async ({ page }) => {
+     import { test, expect } from "@playwright/test";
+     import LoginPage from "../pages/login";
+     
+      test("Login with valid credential using page object", async ({ page }) => {
            const loginPage = new LoginPage(page);
-           await loginPage.navigate();
-           await loginPage.login('testuser', 'password123');
-          expect(await page.url()).toBe('https://example.com/dashboard');
-        
-    });
+           await loginPage.goto();
+           await loginPage.signIn();
+           await loginPage.emailInput.fill("customer@practicesoftwaretesting.com");
+           await loginPage.passwordInput.fill("welcome01");
+           await loginPage.loginButton.click();
+           await expect(page.getByTestId("nav-menu")).toContainText("Jane Doe");
+          });
 
 ### 🛠 Running Tests
 
@@ -98,7 +137,7 @@ This repository contains an automated testing framework using Playwright with Ty
 
 - Run tests with a specific file
       
-               npx playwright test tests/login.spec.ts
+               npx playwright test tests/loginpage.spec.ts
 
 ### 📊 Test Reporting
 
