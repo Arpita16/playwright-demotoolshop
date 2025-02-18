@@ -17,12 +17,10 @@ export default class LoginPage {
   
 
   async goto() {
-    await this.page.goto("https://practicesoftwaretesting.com/");
+    await this.page.goto(process.env.URL+"/auth/login");
   }
 
-  async signIn() {
-    await this.page.getByTestId("nav-sign-in").click();
-  }
+  
 
   async login(email: string, password: string) {
     await this.emailInput.fill(email);

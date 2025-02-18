@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import LoginPage from "../pages/login";
+import LoginPage from "../../pages/login";
 
 test.describe("Login Page", () => {
      test.beforeEach(async ({ page }) => {
@@ -19,10 +19,9 @@ test.describe("Login Page", () => {
     }); 
 });
 
-test.only("Login with valid credential using page object", async ({ page }) => {
+test("Login with valid credential using page object", async ({ page }) => {
   const loginPage = new LoginPage(page);
   await loginPage.goto();
-  await loginPage.signIn();
   await loginPage.emailInput.fill("customer@practicesoftwaretesting.com");
   await loginPage.passwordInput.fill("welcome01");
   await loginPage.loginButton.click();

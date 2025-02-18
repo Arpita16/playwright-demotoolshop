@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, Page } from "@playwright/test";
 
 test.describe("Home page", () => {
   test.beforeEach(async ({ page }) => {
@@ -30,3 +30,5 @@ test.describe("Home page", () => {
   });
 
 });
+
+
