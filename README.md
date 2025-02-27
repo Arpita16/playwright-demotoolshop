@@ -59,7 +59,7 @@ This Project contains an open source website("https://practicesoftwaretesting.co
 
    **1.Clone the repository**
   
-      git clone https://github.com/your-username/playwright-demotoolshop.git
+      git clone https://github.com/Arpita16/playwright-demotoolshop.git
       cd playwright-demotoolshop
 
    **2.Install dependencies**
