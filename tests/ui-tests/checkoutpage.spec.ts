@@ -20,11 +20,11 @@ test.describe("Checkout Page", () => {
             await expect(
               page.locator(".step-indicator").filter({ hasText: "2" })
             ).toHaveCSS("background-color", "rgb(51, 153, 51)");
-            await page.getByTestId("address").fill("Centralvägen 21");
+            await page.getByTestId("street").fill("Centralvägen 21");
             await page.getByTestId("city").fill("Solna");
             await page.getByTestId("state").fill("Stockholm");
             await page.getByTestId("country").fill("Sweden");
-            await page.getByTestId("postcode").fill("17168");
+            await page.getByTestId("postal_code").fill("17168");
             await page.getByTestId("proceed-3").click();
             await expect(page.getByTestId("finish")).toBeDisabled();
             await page.getByTestId("payment-method").selectOption("Buy Now Pay Later");

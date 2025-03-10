@@ -31,11 +31,11 @@ export default class CheckoutPage {
         ).toHaveCSS("background-color", "rgb(51, 153, 51)");
     }
     async fillShippingDetails(){
-        await this.page.getByTestId("address").fill("Centralvägen 21");
+        await this.page.getByTestId("street").fill("Centralvägen 21");
         await this.page.getByTestId("city").fill("Solna");
         await this.page.getByTestId("state").fill("Stockholm");
         await this.page.getByTestId("country").fill("Sweden");
-        await this.page.getByTestId("postcode").fill("17168");
+        await this.page.getByTestId("postal_code").fill("17168");
         await this.page.getByTestId("proceed-3").click();
     }
     async selectPaymentMethod(){  
