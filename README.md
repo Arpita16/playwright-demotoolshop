@@ -7,6 +7,7 @@
 This repository contains an automated testing framework using Playwright with TypeScript, following the Page Object Model (POM) design pattern. It enables efficient test automation for web applications with better maintainability and scalability.
 
 This Project contains an open source website("https://practicesoftwaretesting.com/") UI testing Framework for HomePage,LoginPage,add a product to cart and checkout process.
+This project also contains API Testing for HomePage to get the list of all products and test the login with valid credentias through loginPage API.
 
 1.Login to application using the link(("https://practicesoftwaretesting.com/")
 
@@ -28,7 +29,13 @@ This Project contains an open source website("https://practicesoftwaretesting.co
 
 10.Fill all the details as logged in user and do the checkout process.
 
-11."Payment was successful" should be visible on the checkout page.
+11."Payment was successful" should be visible on the checkout page
+
+***API Test***
+
+1.Get the list of products from HomePage API using GET method.
+
+2.Create a user using loginPage API to login successfully.
 
 ### 🛠️ Tech Stack
 
@@ -44,10 +51,13 @@ This Project contains an open source website("https://practicesoftwaretesting.co
 
        📦 playwright-demotoolshop
             ┣ 📂 tests
+            ┣ ┣ 📂 ui-tests
             ┃ ┣ 📜 auth.setup.ts
             ┃ ┣ 📜 checkoutpage.spec.ts
             ┃ ┣ 📜 homepage.spec.ts
             ┃ ┣ 📜 loginpage.spec.ts
+            ┣ ┣ 📂 api-tests
+            ┃ ┣ 📜 api.spec.ts
             ┣ 📂 pages
             ┃ ┣ 📜 checkout.ts
             ┃ ┣ 📜 login.ts
@@ -110,7 +120,7 @@ This Project contains an open source website("https://practicesoftwaretesting.co
 ### 🧪 Writing Tests
   Tests are written using Playwright Test Runner.
 
- **Example**: tests/loginpage.spec.ts
+ **Example**: tests/ui-tests/loginpage.spec.ts
 
      import { test, expect } from "@playwright/test";
      import LoginPage from "../pages/login";
